@@ -12,4 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d3da380ca85b4d3aaf70d3bf059a7421, type: 3}
   m_Name: _AllAssemblies
   m_EditorClassIdentifier: AssemblyBuilder::AssemblyBuilder.AssemblyBuilderCollection
-  _builders: []
+  _builders:
+  - {fileID: 11400000, guid: 29e0b21f150193d49a0d3d49b19b3133, type: 2}
+  - {fileID: 11400000, guid: 4ea1fc402b3f3db489e32b714d440ed5, type: 2}
