@@ -168,7 +168,6 @@ CLAUDE.local.md
 # there, but a vendored plugin that ships one needs an explicit negation next to it.
 [Bb]in/
 [Oo]bj/
-/packages/
 
 # Python
 .venv/
