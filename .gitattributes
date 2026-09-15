@@ -1,0 +1,230 @@
+# Universal .gitattributes for a Unity project.
+#
+# Two jobs: teach git what Unity's own file types ARE (text, YAML to merge with unityyamlmerge,
+# JSON, which language a shader is for GitHub's stats), and push every binary format to LFS.
+#
+# The LFS lists are deliberately broad. A format that never appears in a given project costs
+# nothing, while a format that appears and was NOT listed costs a rewrite of history - so the
+# rule is to list anything that is binary, not only what is already in the repository.
+
+# Define macros (only works in top-level gitattributes files)
+[attr]lfs               filter=lfs diff=lfs merge=lfs -text
+[attr]unity-json        eol=lf linguist-language=json
+[attr]unity-yaml        merge=unityyamlmerge eol=lf linguist-language=yaml
+
+# Optionally collapse Unity-generated files on GitHub diffs
+# [attr]unity-yaml        merge=unityyamlmerge text linguist-language=yaml linguist-generated
+
+# Unity source files
+*.cginc                 text
+*.compute               text linguist-language=hlsl
+*.cs                    text diff=csharp
+*.hlsl                  text linguist-language=hlsl
+*.raytrace              text linguist-language=hlsl
+*.shader                text
+
+# Unity JSON files
+*.asmdef                unity-json
+*.asmref                unity-json
+*.index                 unity-json
+*.inputactions          unity-json
+*.shadergraph           unity-json
+*.shadersubgraph        unity-json
+
+# Unity UI Toolkit files
+*.tss                   text diff=css linguist-language=css
+*.uss                   text diff=css linguist-language=css
+*.uxml                  text linguist-language=xml linguist-detectable
+
+# Unity YAML
+*.anim                  unity-yaml
+*.asset                 unity-yaml
+*.brush                 unity-yaml
+*.controller            unity-yaml
+*.flare                 unity-yaml
+*.fontsettings          unity-yaml
+*.giparams              unity-yaml
+*.guiskin               unity-yaml
+*.lighting              unity-yaml
+*.mask                  unity-yaml
+*.mat                   unity-yaml
+*.meta                  unity-yaml
+*.mixer                 unity-yaml
+*.overrideController    unity-yaml
+*.playable              unity-yaml
+*.prefab                unity-yaml
+*.preset                unity-yaml
+*.renderTexture         unity-yaml
+*.scenetemplate         unity-yaml
+*.shadervariants        unity-yaml
+*.signal                unity-yaml
+*.spriteatlas           unity-yaml
+*.spriteatlasv2         unity-yaml
+*.terrainlayer          unity-yaml
+*.unity                 unity-yaml
+
+# "physic" for 3D but "physics" for 2D
+*.physicMaterial        unity-yaml
+*.physicsMaterial2D     unity-yaml
+
+# Exclude third-party plugins from GitHub stats
+Assets/Plugins/**       linguist-vendored
+
+# Unity LFS
+*.cubemap               lfs
+*.unitypackage          lfs
+
+# 3D models
+*.3dm                   lfs
+*.3ds                   lfs
+*.abc                   lfs
+*.blend                 lfs
+*.c4d                   lfs
+*.collada               lfs
+*.dae                   lfs
+*.dxf                   lfs
+*.FBX                   lfs
+*.fbx                   lfs
+*.glb                   lfs
+*.jas                   lfs
+*.lws                   lfs
+*.lxo                   lfs
+*.ma                    lfs
+*.max                   lfs
+*.mb                    lfs
+*.obj                   lfs
+*.ply                   lfs
+*.skp                   lfs
+*.stl                   lfs
+*.usd                   lfs
+*.usdc                  lfs
+*.usdz                  lfs
+*.ztl                   lfs
+
+# Audio
+*.aac                   lfs
+*.aif                   lfs
+*.aiff                  lfs
+*.flac                  lfs
+*.it                    lfs
+*.m4a                   lfs
+*.mod                   lfs
+*.mp3                   lfs
+*.ogg                   lfs
+*.opus                  lfs
+*.s3m                   lfs
+*.wav                   lfs
+*.wma                   lfs
+*.xm                    lfs
+
+# Video
+*.asf                   lfs
+*.avi                   lfs
+*.flv                   lfs
+*.m4v                   lfs
+*.mkv                   lfs
+*.mov                   lfs
+*.mp4                   lfs
+*.mpeg                  lfs
+*.mpg                   lfs
+*.ogv                   lfs
+*.webm                  lfs
+*.wmv                   lfs
+
+# Images
+*.astc                  lfs
+*.basis                 lfs
+*.bmp                   lfs
+*.dds                   lfs
+*.exr                   lfs
+*.gif                   lfs
+*.hdr                   lfs
+*.iff                   lfs
+*.jpeg                  lfs
+*.jpg                   lfs
+*.ktx                   lfs
+*.ktx2                  lfs
+*.pict                  lfs
+*.png                   lfs
+*.psd                   lfs
+*.pvr                   lfs
+*.tga                   lfs
+*.tif                   lfs
+*.tiff                  lfs
+*.webp                  lfs
+
+# Compressed Archive
+*.7z                    lfs
+*.br                    lfs
+*.bz2                   lfs
+*.gz                    lfs
+*.lz4                   lfs
+*.lzma                  lfs
+*.rar                   lfs
+*.tar                   lfs
+*.tar.*                 lfs
+*.tgz                   lfs
+*.xz                    lfs
+*.zip                   lfs
+*.zst                   lfs
+
+# Compiled libraries and executables
+*.a                     lfs
+*.aar                   lfs
+*.apk                   lfs
+*.bundle                lfs
+*.dll                   lfs
+*.dylib                 lfs
+*.exe                   lfs
+*.jar                   lfs
+*.lib                   lfs
+*.pdb                   lfs
+*.so                    lfs
+*.wasm                  lfs
+
+# Installers and disk images
+*.deb                   lfs
+*.dmg                   lfs
+*.iso                   lfs
+*.msi                   lfs
+*.rpm                   lfs
+
+# Fonts
+*.otf                   lfs
+*.ttc                   lfs
+*.ttf                   lfs
+*.woff                  lfs
+*.woff2                 lfs
+
+# Documents
+*.pdf                   lfs
+
+# ETC
+*.reason                lfs
+*.rns                   lfs
+
+# Spine export file for Unity
+*.skel.bytes            lfs
+
+# Opaque data blobs. A file that is read as bytes has nothing to diff and changes wholesale on
+# every save, which is the whole case for LFS. Databases are here for the same reason.
+*.bin                   lfs
+*.blob                  lfs
+*.bytes                 lfs
+*.dat                   lfs
+*.db                    lfs
+*.pak                   lfs
+*.sqlite                lfs
+*.sqlite3               lfs
+
+# An OpenPGP message. Ciphertext is incompressible and differs in every byte from the previous
+# version even when the plaintext barely moved - the worst possible thing to keep as a plain
+# object.
+*.gpg                   lfs
+
+# Exceptions for .asset files (mostly scene generated files). These are binary YAML or plain
+# binary payloads: merging them as text produces a file Unity cannot load.
+LightingData.asset      binary
+*.terrain.asset         binary
+*_comp_dir.png          binary
+*_comp_light.exr        binary
