@@ -38,8 +38,9 @@ broken, while its references quietly stop tracking the graph. Skip the collectio
 thing happens one level up.
 
 **Create the builder through the menu, not by hand:**
-`Assets/Create/Scripting/AssemblyBuilder/AssemblyBuilder from AssemblyDefinition` (`Shift+Ctrl+F11`)
-with the `.asmdef` selected. It fills `_definitions` for you and lets Unity write the `.meta` — which
+`Assets/Create/Scripting/AssemblyBuilder/AssemblyBuilder from AssemblyDefinition`
+(`Shift+Ctrl+F11`; `Shift+Cmd+F11` on macOS) with the `.asmdef` selected.
+It fills `_definitions` for you and lets Unity write the `.meta` — which
 is what keeps this compatible with the "never hand-write a `.meta`" rule. Then set the parents.
 
 The full checklist, including the test and editor variants, is the `add-assembly` skill.

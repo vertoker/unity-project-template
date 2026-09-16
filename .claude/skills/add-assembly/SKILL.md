@@ -63,7 +63,8 @@ Copy the shape from a file that already works — `Assets/Code/Shared/Tests/Shar
 ## 2. The builder asset
 
 **Through the menu, never by hand:** select the new `.asmdef`, then
-`Assets/Create/Scripting/AssemblyBuilder/AssemblyBuilder from AssemblyDefinition` (`Shift+Ctrl+F11`).
+`Assets/Create/Scripting/AssemblyBuilder/AssemblyBuilder from AssemblyDefinition`
+(`Shift+Ctrl+F11`; `Shift+Cmd+F11` on macOS).
 This fills `_definitions` and lets Unity write the `.meta` — a hand-written `.meta` invents a GUID and
 detaches the asset from everything.
 

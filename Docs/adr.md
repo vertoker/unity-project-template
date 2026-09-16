@@ -58,4 +58,4 @@ back into IDE configuration and accepting that it stops applying outside one IDE
 
 The surviving `.DotSettings` file is named after the solution, which Unity names after the **project
 folder**. Renaming the project therefore orphans it silently — nothing breaks, the abbreviations
-simply stop applying. Renaming that file is a step in `INIT_PLAN.md` phase 4 for exactly this reason.
+simply stop applying. Renaming that file is a step in `INIT_PLAN.md` phase 5 for exactly this reason.

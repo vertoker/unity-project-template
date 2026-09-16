@@ -57,6 +57,10 @@ derive on its own, and this it cannot.
   skill. Report it only if the folder has *since* accumulated such knowledge.
 - **`Docs/Issues/` entries describing work that was never built.** That is what the folder is for;
   the status line at the top of each file says which kind it is.
+- **A `README.md` that is only a title and two sentences.** That is its finished state, set by
+  `INIT_PLAN.md` on the way out. The README addresses people who are not in a session; `CLAUDE.md`
+  is the map for everyone who is. Do not score it against criteria 1 or 2, and never move content
+  into it to make it look complete.
 - **Four things that look like dead references and are not.** Check for these before writing a −10;
   a naive path check reports all of them:
   - **Unity menu paths.** `Assets/Create/Scripting/AssemblyBuilder/…` and `Tools/AssemblyBuilder/…`

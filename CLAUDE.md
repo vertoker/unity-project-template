@@ -69,7 +69,7 @@ Everything written into the repository — comments, `.md`, identifiers, commit-
 English. Everything said to the author is `<preferred chat language>`. This is mandatory, not a
 preference, and it does not soften when the source material is in another language.
 
-<!-- RULE_4 — INIT_PLAN phase 2 replaces this line with InitTemp/Rule4/MODE/rule_4.md -->
+<!-- RULE_4 — INIT_PLAN phase 3 replaces this line with InitTemp/Rule4/MODE/rule_4.md -->
 
 ### 5. Assemblies only through AssemblyBuilder
 

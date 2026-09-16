@@ -1,16 +1,34 @@
 # INIT_PLAN
 
-Run this once, in a fresh clone, before any other work. Six phases, in order. The last one deletes
+Run this once, in a fresh clone, before any other work. Seven phases, in order. The last one deletes
 this file.
 
 **Rule 2 applies to this plan.** It does not commit. It finishes by offering one.
 
 ---
 
-## Phase 1 — Interview
+## Phase 1 — Language
+
+Ask one question, in English, and ask nothing else yet:
+
+> **Which language should I use when talking to you?**
+
+Then wait. **From your next message onwards, speak that language** — the rest of the interview, every
+confirmation, every summary and every report through to phase 7.
+
+This is a phase of its own because the answer changes how the remaining phases are *conducted*, not
+just what gets recorded. Bundled in with nine other questions, it arrives too late to matter: the
+other nine were already asked in the wrong language.
+
+The answer becomes `<preferred chat language>` in rule 3. It does not change what goes **into** the
+repository — everything written to disk stays English, which is the other half of the same rule.
+
+---
+
+## Phase 2 — Interview
 
 Ask all of it in one pass, then confirm the derived values. Do not start filling anything in until
-the answers are complete — phase 3 depends on every one of them.
+the answers are complete — phase 4 depends on every one of them.
 
 ### Asked
 
@@ -21,11 +39,10 @@ the answers are complete — phase 3 depends on every one of them.
 | 3 | Genre | |
 | 4 | Target platforms | |
 | 5 | Distribution channels | Stores, launchers, direct |
-| 6 | Company / publisher name | Default: the author's nick from #8 |
-| 7 | Preferred conversation language | Goes into rule 3 |
-| 8 | Author: nick, full name, role, area of responsibility | The nick becomes a C# identifier in `Metadata.Author.*` — no spaces or punctuation |
-| 9 | Target locales | Only `English (en)` exists in the project today |
-| 10 | **Autonomy mode: `Careful`, `Bold` or `Paranoid`** | Explain all three from the table below. **`Careful` is the recommendation** — offer it as the default |
+| 6 | Company / publisher name | Default: the author's nick from #7 |
+| 7 | Author: nick, full name, role, area of responsibility | The nick becomes a C# identifier in `Metadata.Author.*` — no spaces or punctuation |
+| 8 | Target locales | Only `English (en)` exists in the project today |
+| 9 | **Autonomy mode: `Careful`, `Bold` or `Paranoid`** | Explain all three from the table below. **`Careful` is the recommendation** — offer it as the default |
 
 ### Autonomy modes
 
@@ -35,7 +52,7 @@ the answers are complete — phase 3 depends on every one of them.
 | **`Bold`** | The whole MCP surface without asking, including Play Mode and saving scenes — but each action is announced in one line, whatever was taken is restored, and a behaviour change is not done until it has been watched happening. Deletions, bulk edits, packages, builds and new assemblies still need permission. |
 | **`Paranoid`** | Reading only. Every write — including `refresh_unity` and running tests — needs permission granted in advance for that specific action, and is reported individually afterwards. |
 
-This choice leaves no trace in the project. Phase 2 lays down one mode's files and deletes the rest.
+This choice leaves no trace in the project. Phase 3 lays down one mode's files and deletes the rest.
 
 ### Derived — show and confirm, do not ask
 
@@ -48,9 +65,9 @@ This choice leaves no trace in the project. Phase 2 lays down one mode's files a
 
 ---
 
-## Phase 2 — Lay down the autonomy mode
+## Phase 3 — Lay down the autonomy mode
 
-Let `MODE` be the choice from phase 1.
+Let `MODE` be the choice from phase 2.
 
 | From | To |
 |---|---|
@@ -69,7 +86,7 @@ into prose and has to be rewritten as a reference to rule 4.
 
 ---
 
-## Phase 3 — Fill
+## Phase 4 — Fill
 
 ### Placeholders — all fifteen
 
@@ -90,9 +107,9 @@ missed silently.
 | `<git user name>`, `<git user email>` | `Docs/authors.md` |
 | `<systems>` | `Docs/architecture.md`, `Assets/Code/Systems/CLAUDE.md` — an empty table is correct in a fresh project; say so rather than inventing rows |
 | `<target locales>` | `Assets/Addressables/CLAUDE.md` |
-| `<company name>` | `ProjectSettings.asset`, in phase 4 |
+| `<company name>` | `ProjectSettings.asset`, in phase 5 |
 
-**Not in scope:** `.claude/rules/*` holds no placeholders — mode variance is carried by phase 2, not
+**Not in scope:** `.claude/rules/*` holds no placeholders — mode variance is carried by phase 3, not
 by substitution. `<summary>`, `<param>` and `<returns>` in `Docs/code_style.md` are XML doc tags, not
 slots.
 
@@ -130,10 +147,10 @@ Let Unity generate the `.meta` files — never write one by hand.
 
 ---
 
-## Phase 4 — Rename
+## Phase 5 — Rename
 
 - `ProjectSettings/ProjectSettings.asset`: `productName` (`UndefinedGame` → the project name) and
-  `companyName` (`UndefinedCompany` → the company name from phase 1).
+  `companyName` (`UndefinedCompany` → the company name from phase 2).
 - **Rename `vertoker_template.sln.DotSettings` to `<folder name>.sln.DotSettings`.** Unity names the
   solution after the project folder, so a `.DotSettings` named after the old one is orphaned
   silently — nothing breaks, the abbreviations simply stop applying. See `Docs/adr.md`.
@@ -143,7 +160,7 @@ and `.csproj` are generated — do not touch them.
 
 ---
 
-## Phase 5 — Verify
+## Phase 6 — Verify
 
 Follow rule 4 for the chosen mode, and the `unity-verify` skill. Under `Paranoid`, ask for the writes
 this phase needs before starting it.
@@ -166,18 +183,33 @@ this phase needs before starting it.
 
 ---
 
-## Phase 6 — Finish
+## Phase 7 — Finish
 
-**Only if phase 3's second pass found zero remaining placeholders.** If any are left, go back.
+**Only if phase 4's second pass found zero remaining placeholders.** If any are left, go back.
 
 1. Delete `INIT_PLAN.md`.
 2. Remove the init banner from the top of `CLAUDE.md` — the two lines beginning
    **"This project is not initialized yet."**
-3. Confirm the cleanup:
+3. **Replace `README.md` wholesale** with the project name as an `# H1` and the 2–3 sentence
+   description from phase 2. Nothing else — no stack list, no getting-started section, no link map.
+
+   The template README describes the template, so every line of it is false once this project exists;
+   and a repository README is the one file read by people who are not in a session, for whom the
+   agent layer is not the subject. `CLAUDE.md` is the map for anything else, and it stays current
+   because sessions read it.
+
+   ```markdown
+   # Starfall
+
+   A twin-stick shooter about salvaging a dead orbital station. Runs on PC and Android.
+   ```
+
+4. Confirm the cleanup:
    - `rg "<project name>"` — empty,
    - `InitTemp/` — gone,
    - `rg -i "careful|bold|paranoid"` — empty,
-   - `CLAUDE.md` — under 300 lines.
-4. Print a summary: what was filled in, which mode was chosen, what phase 5 actually returned, and
+   - `CLAUDE.md` — under 300 lines,
+   - `README.md` — no longer mentions the template, `INIT_PLAN` or the autonomy modes.
+5. Print a summary: what was filled in, which mode was chosen, what phase 6 actually returned, and
    anything that could not be verified.
-5. **Offer a commit. Do not make one** — rule 2.
+6. **Offer a commit. Do not make one** — rule 2.

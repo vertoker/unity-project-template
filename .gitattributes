@@ -23,6 +23,19 @@
 *.raytrace              text linguist-language=hlsl
 *.shader                text
 
+# Project text that is not Unity's. Documentation and tool configs carry no Unity semantics, but
+# they are read on every platform and by tooling that is stricter about line endings than an editor
+# is - the agent instruction files, the hook, and every config under .claude/ among them. Pinning
+# eol=lf keeps one checkout from rewriting whole files the next checkout has to diff.
+*.md                    text eol=lf
+*.json                  text eol=lf
+*.mjs                   text eol=lf diff=javascript
+*.js                    text eol=lf diff=javascript
+*.yml                   text eol=lf
+*.yaml                  text eol=lf
+*.editorconfig          text eol=lf
+*.DotSettings           text eol=lf linguist-language=xml
+
 # Unity JSON files
 *.asmdef                unity-json
 *.asmref                unity-json

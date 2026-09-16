@@ -51,7 +51,7 @@ the game does.
 
 1. **Note what is currently open** — which scene, and whether it has unsaved changes. You are putting
    this back.
-2. **Announce in one line**: `Entering Play Mode on Scenes/Boot.unity to verify <what>`.
+2. **Announce in one line**: `Entering Play Mode on Scenes/Boot.unity to verify WHAT-YOU-ARE-CHECKING`.
 3. Open the scene, enter Play Mode, and **watch the thing you changed actually happen.**
 4. Take a screenshot if the result is visual. A screenshot is evidence; a description is a claim.
 5. **Exit Play Mode. Reopen the scene that was open, and discard your own changes to it** unless

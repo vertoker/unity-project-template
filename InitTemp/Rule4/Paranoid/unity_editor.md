@@ -42,12 +42,22 @@ or make a request to the URL in `.mcp.json`. **If it answers, start nothing.**
 window the author can close**, never as a child of this session:
 
 ```
-uvx --from <source> mcp-for-unity --transport http --http-url http://127.0.0.1:8080 --project-scoped-tools
+uvx --offline --from "mcpforunityserver==10.1.2" mcp-for-unity --transport http --http-url http://127.0.0.1:8080 --project-scoped-tools
 ```
 
-The exact command, including the path to `uvx`, is shown by the MCP for Unity window in the Editor;
-it is assembled by `ServerCommandBuilder.TryBuildCommand` in `com.coplaydev.unity-mcp`. Take it from
-the window rather than reconstructing it.
+**That is the shape, not the string.** The version, the `--offline` / `--prerelease` flags and the
+path to `uvx` all come from the MCP for Unity window in the Editor, which prints the exact command.
+Do not reconstruct it from `package.json` — the version there is the *Unity package* version, not the
+server package version, and they differ. The builder is `ServerCommandBuilder.TryBuildCommand`.
+
+**Opening that window is platform-specific.** On macOS and Linux, start it from an ordinary
+terminal. On Windows, use `cmd /k` and **leave the `uvx` path unquoted** — `cmd` strips the
+outermost pair of quotes from its argument, so a command whose first character is a quote comes
+back as `is not recognized as an internal or external command`.
+
+`uvx` is normally on `PATH`. When it is not, the package looks in `/opt/homebrew/bin` and
+`/usr/local/bin` on macOS, `/usr/local/bin` and `/usr/bin` on Linux, and `%LOCALAPPDATA%\Programs\uv`
+on Windows.
 
 **3. Never start a second one.** Two servers on one endpoint produce
 `Multiple Unity instances are connected`, and from then on it is unclear which Editor a command

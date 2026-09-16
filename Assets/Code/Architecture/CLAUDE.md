@@ -48,8 +48,8 @@ console. Never the `.asmdef` directly; `references` there is generated output.
 
 Adding an assembly is three things — the `.asmdef`, its builder, and the collection entry. Create the
 builder through `Assets/Create/Scripting/AssemblyBuilder/AssemblyBuilder from AssemblyDefinition`
-(`Shift+Ctrl+F11`) with the `.asmdef` selected, so that `_definitions` is filled and Unity writes the
-`.meta`. The `add-assembly` skill carries the whole checklist.
+(`Shift+Ctrl+F11`; `Shift+Cmd+F11` on macOS) with the `.asmdef` selected, so that `_definitions` is
+filled and Unity writes the `.meta`. The `add-assembly` skill carries the whole checklist.
 
 ## Constraints worth knowing before you debug something here
 
