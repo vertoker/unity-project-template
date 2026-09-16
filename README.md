@@ -33,14 +33,14 @@ markdown here, but nothing will attach itself to the right files on its own
 
 **It is assembled from practice, not designed up front.** Every rule earned its place on one of my 3
 working projects, and most of them earned it by something going wrong first. I can't speak for how well
-this transfers to a team bigger than one person, I have never run it that way
+this transfers to a giant teams more than 3-4 person, I have never run it that way
 
 **New Unity where performance is the point, boring tech where it is not.** DOTS (`Entities`, `Burst`,
 `Collections`, `Mathematics`) and UI Toolkit carry the parts that have to be fast. The managed side is
 `VContainer`, `UniTask` and `UniRx`, picked because they have shipped in production and behave
 predictably, not because they are new. Nothing experimental sits on the critical path
 
-**This is my stack, not a community one.** If you want a different one - fork it, that is the intended
+**This is my stack, not a community one.** If you want a different one - **fork it**, that is the intended
 use and it costs you nothing. Pull requests here I accept only for fixes that are useful to me,
 anything that widens the template toward somebody else's taste gets declined
 
@@ -57,10 +57,10 @@ can't. Ordinary bug fixes skip the plan and go straight to the cheaper model
 holds no knowledge beyond its own code yet, not an unfinished file and not something to fill in to make
 the repository look tidy
 
-**Every `.asmdef` is generated from the AssemblyBuilder graph, and it works.** The `references` arrays
-are never hand-edited. The graph is a parallel tree of assets under `Assets/Code/Architecture/`, and
-`Tools/AssemblyBuilder/Build All` rewrites all 6 assemblies from it. Adding an assembly means adding a
-builder, not editing a list of GUIDs
+**Every `.asmdef` is generated from the [AssemblyBuilder](https://github.com/vertoker/assemblybuilder)
+graph, and it works.** The `references` arrays are never hand-edited. The graph is a parallel tree of
+assets under `Assets/Code/Architecture/`, and `Tools/AssemblyBuilder/Build All` rewrites all 6
+assemblies from it. Adding an assembly means adding a builder, not editing a list of GUIDs
 
 **The agent writes, the author commits.** Rule 2, no exceptions, not even for the initialisation plan
 itself
@@ -99,8 +99,7 @@ a package being installed is inventory and not a decision
 
 ## Requirements
 
-Unity `6000.6.0f1` or newer · Claude Code (Opus, on Sonnet the plan drifts) · Node.js for the hook ·
+Unity `6000.6.0f1` or newer · Claude Code · Node.js for the hook ·
 `uv` / `uvx` for the Unity MCP server · Git and Git LFS
 
-Works on Windows, macOS and Linux. I run it on Windows 11 daily, the other two I checked by reading the
-paths rather than by booting into them
+Works on Windows, macOS and Linux
