@@ -2,6 +2,9 @@
     "name": "Runtime.Editor",
     "rootNamespace": "Runtime.Editor",
     "references": [
+        "GUID:f51ebe6a0ceec4240a699833d6309b23",
+        "GUID:560b04d1a97f54a4e82edc0cbbb69285",
+        "GUID:b0214a6008ed146ff8f122a6a9c2f6cc",
         "GUID:2024d38f372b3da428e43d662f2fe03f",
         "GUID:f1e66d052e3f17840a04492c91c75f37",
         "GUID:8815664982bfe6a4ea1d4dc4e5c1226b"

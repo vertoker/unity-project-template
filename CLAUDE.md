@@ -39,11 +39,12 @@ in `Docs/`, in `.claude/rules/` (which load with the files they govern) and in t
 
 ### Installed but not used
 
-The package list is not a list of decisions. This project starts with a broad manifest and an empty
-`Assets/Code`, so at the outset **nothing in it is load-bearing** — a package being present is not
-permission to build a solution on it, and the absence of a row above is not a gap to fill. A package
-earns its row in the table the moment it is first used deliberately, and the row names where the
-reasoning lives. Until then, `Packages/manifest.json` is the only inventory, and there is no second list.
+The package list is not a list of decisions. This project starts with a broad manifest and a `Shared`
+toolkit that touches almost none of it, so at the outset **nothing in it is load-bearing** — a package
+being present is not permission to build a solution on it, and the absence of a row above is not a gap
+to fill. A package earns its row in the table the moment it is first used deliberately, and the row
+names where the reasoning lives. Until then, `Packages/manifest.json` is the only inventory, and there
+is no second list.
 
 ## Rules
 
@@ -156,9 +157,9 @@ Composition starts at `Assets/Scenes/Boot.unity` and flows into the VContainer s
   `Subject` alongside the type's other disposables.
 - Features that need dependencies register in the relevant scope rather than resolving manually.
 - Assembly reference changes go through `Assets/Code/Architecture/`, never by editing GUID lists.
-- Logging goes through one project-wide entry point rather than scattered `Debug.Log` calls — it is
-  the only place that can tell Editor formatting from device formatting. Introduce it in `Shared`
-  the first time anything needs to log.
+- Logging goes through `Shared.GameLogger`, never a scattered `Debug.Log` — it is the only place that
+  can tell Editor formatting from device formatting. Traps and the reasoning:
+  `Assets/Code/Shared/CLAUDE.md`.
 - Prefer generic, data-driven implementations over per-case special handling.
 - Style, naming, comments, error handling: `Docs/code_style.md`. It is the long one, and it is the
   file to read before writing the first line of a new subsystem.
@@ -200,6 +201,7 @@ Read the row that matches the question you arrived with.
 | Working in | Read |
 |---|---|
 | anything under `Assets/Code` | `Assets/Code/CLAUDE.md` — the layer map |
+| the bottom layer — utilities, logging, the FSM | `Assets/Code/Shared/CLAUDE.md` |
 | a subsystem, or adding one | `Assets/Code/Systems/CLAUDE.md` |
 | the assembly graph, an `.asmdef`, a builder asset | `Assets/Code/Architecture/CLAUDE.md` |
 | **any UI string, key or string table** | `Assets/Addressables/CLAUDE.md` — read it first, every time |

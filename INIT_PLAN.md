@@ -48,6 +48,7 @@ apply", and phase 4 drops the line rather than writing `—` into the file.
 | 7 | Author: nick and full name | **required** | The nick becomes a C# identifier in `Metadata.Author.*` — no spaces or punctuation. Full name may be the nick again |
 | 8 | Target locales | optional | **Defaults to `English (en)`**, which is the only locale in the project. A dash means English only |
 | 9 | **Autonomy mode** | **required** | `Careful`, `Bold`, `Paranoid` or `Automatic`. Explain all four from the table below. **`Careful` is the recommendation** — offer it as the default |
+| 10 | **Starter code** | **required** | What happens to the `Shared` toolkit the template ships. Three answers, from the table below. **`Keep the essentials` is the recommendation** — offer it as the default |
 
 ### Autonomy modes
 
@@ -65,6 +66,30 @@ can throw away, and the wrong one for anything whose loss would hurt. Use it at 
 
 This choice leaves no trace in the project. Phase 3 lays down one mode's files and deletes the rest.
 
+### Starter code
+
+`Assets/Code/Shared` ships a small toolkit. It is a starting point, not a dependency — every layer
+above it is empty, and nothing outside `Shared` references any of it. What is there:
+
+| Where | What it is |
+|---|---|
+| `Shared/GameLogger.cs`, `ColorNameCache.cs` | the logging entry point the conventions require instead of `Debug.Log`, and the per-name colors it prints with |
+| `Shared/SerializableGuid.cs` + `Editor/SerializableGuidDrawer.cs` | a `Guid` Unity can serialize, and its inspector — Unity ships no equivalent |
+| `Shared/Il2CppSetOptionAttribute.cs` | turns IL2CPP's null and bounds checks off per method; Unity's own copy is `internal`, so a project-owned one is the only way to use it |
+| `Shared/Async/` | `AsyncRunner` — cancel-and-restart (debounce) around a UniTask action |
+| `Shared/States/` | a finite state machine keyed by concrete state type |
+| `Shared/Utils/` | `DebugUtils` (is this a checked build), `ObjectPoolFactory`, `FactoryGo` (GameObject creation), `UnityFastNoise` (third-party noise) |
+
+| # | Answer | What survives |
+|---|---|---|
+| 1 | **Keep everything** | all of it |
+| 2 | **Keep the essentials** *(recommended)* | everything in the root of `Shared/` plus `Shared/Editor/SerializableGuidDrawer.cs`; `Async/`, `States/` and `Utils/` go |
+| 3 | **Delete all of it** | nothing — `Shared` is left with its `.asmdef` alone |
+
+**The three assemblies stay in every case.** `Shared`, `Shared.Tests` and `Shared.Editor` keep their
+folders and their `.asmdef` files whatever the answer — the question is about files, never about the
+assembly graph. Phase 3 carries it out.
+
 ### Derived — show and confirm, do not ask
 
 - Folder name, Unity version (`ProjectSettings/ProjectVersion.txt`).
@@ -76,7 +101,12 @@ This choice leaves no trace in the project. Phase 3 lays down one mode's files a
 
 ---
 
-## Phase 3 — Lay down the autonomy mode
+## Phase 3 — Lay down the choices
+
+Two of phase 2's answers are carried out by deleting what was not chosen. Do the mode first: the
+starter-code step edits `CLAUDE.md`, and the mode step replaces a line in it.
+
+### The autonomy mode
 
 Let `MODE` be the choice from phase 2.
 
@@ -104,6 +134,34 @@ does, a mode name leaked into prose and has to be rewritten as a reference to ru
 
 **Scope it to `*.md`.** Unity writes the literal word `Automatic` into `ProjectSettings.asset` eight
 times over — an unscoped grep reports those and the real check gets ignored as noise.
+
+### The starter code
+
+| Answer | Delete |
+|---|---|
+| **Keep everything** | nothing |
+| **Keep the essentials** | `Assets/Code/Shared/Async/`, `States/`, `Utils/` |
+| **Delete all of it** | those three, plus every `.cs` in the root of `Assets/Code/Shared/` and `Assets/Code/Shared/Editor/SerializableGuidDrawer.cs` |
+
+Delete the `.meta` beside every file and folder removed. An orphaned `.meta` is easy to leave behind
+because nothing breaks — Unity simply logs it on the next import, which is phase 6's console.
+
+**Then rewrite `Assets/Code/Shared/CLAUDE.md` to describe what is left.** Its folder index and its
+traps name files; a file that is gone is worse than no file at all. Under **Keep everything** it
+already matches. Under **Keep the essentials**, drop the folder index and every trap about the three
+deleted folders. Under **Delete all of it**, empty the file — do not delete it, it is a reserved slot
+again — and make two edits in the root `CLAUDE.md`:
+
+- drop the `Shared` row from **The map**;
+- replace the logging convention bullet, which now names a type that does not exist, with:
+
+  > - Logging goes through one project-wide entry point rather than scattered `Debug.Log` calls — it
+  >   is the only place that can tell Editor formatting from device formatting. Introduce it in
+  >   `Shared` the first time anything needs to log.
+
+Check: `rg "GameLogger|SerializableGuid|AsyncRunner|FactoryGo|ObjectPoolFactory|StateMachine" -g "*.md"`
+names no deleted file **outside this one** — the inventory table above mentions all of them, and this
+file goes away in phase 7 regardless.
 
 ---
 
@@ -144,13 +202,15 @@ paragraph you just edited; do not reflow the rest of the file.
 by substitution. `<summary>`, `<param>` and `<returns>` in `Docs/code_style.md` are XML doc tags, not
 slots.
 
-**Leave the six empty `CLAUDE.md` files empty** (`Shared/`, `Shared/Tests/`, `Shared/Editor/`,
-`Runtime/`, `Runtime/Tests/`, `Runtime/Editor/`). They are reserved slots, and filling one in with a
-description of an empty folder is the failure the `new-claude-md` skill exists to prevent.
+**Leave the five empty `CLAUDE.md` files empty** (`Shared/Tests/`, `Shared/Editor/`, `Runtime/`,
+`Runtime/Tests/`, `Runtime/Editor/`). They are reserved slots, and filling one in with a description
+of an empty folder is the failure the `new-claude-md` skill exists to prevent. The files under
+`Shared/` that do have content were already brought in line with phase 3's answer — not here.
 
 ### Code — three files
 
-The template ships no `.cs`. Create these now, using the templates in the skills:
+Whatever phase 3 left of the starter code, these three are not part of it and do not exist yet.
+Create them now, using the templates in the skills:
 
 | File | Template | From |
 |---|---|---|
@@ -241,6 +301,6 @@ this phase needs before starting it.
    - `rg -i "careful|bold|paranoid|automatic" -g "*.md"` — empty,
    - `CLAUDE.md` — under 300 lines,
    - `README.md` — no longer mentions the template, `INIT_PLAN` or the autonomy modes.
-5. Print a summary: what was filled in, which mode was chosen, what phase 6 actually returned, and
-   anything that could not be verified.
+5. Print a summary: what was filled in, which mode was chosen, how much of the starter code was kept,
+   what phase 6 actually returned, and anything that could not be verified.
 6. **Offer a commit. Do not make one** — rule 2.

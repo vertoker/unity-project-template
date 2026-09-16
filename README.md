@@ -16,11 +16,13 @@ the game
 
 The plan asks which language you want to talk in first, on its own, and switches to it before anything
 else. Then it interviews you once: name, pitch, genre, platforms, stores, company, author details,
-locales and how much autonomy the agent gets in the Unity Editor. Only the name, the pitch, the author
-and the autonomy mode are required, anything else can be answered with a dash
+locales, how much autonomy the agent gets in the Unity Editor and how much of the starter code you
+want to keep. Only the name, the pitch, the author, the autonomy mode and the starter-code answer are
+required, anything else can be answered with a dash
 
-After the interview it fills in 13 placeholders, creates 3 starter `.cs` files, renames the product,
-verifies that the project compiles and deletes itself. It does not commit, that part stays yours
+After the interview it throws away the starter code you did not keep, fills in 13 placeholders,
+creates 3 more `.cs` files, renames the product, verifies that the project compiles and deletes
+itself. It does not commit, that part stays yours
 
 Namespaces and packages are not asked about: the first follows from the folder layout, and nothing is
 removed from the manifest
@@ -53,7 +55,12 @@ cheaper one executes it, and the plan is the handoff between the two. Plans stay
 their status in the filename, because a finished plan answers why the code is shaped this way and a diff
 can't. Ordinary bug fixes skip the plan and go straight to the cheaper model
 
-**An empty `CLAUDE.md` is normal.** 6 of them ship that way. It is a reserved slot for a folder that
+**`Assets/Code/Shared` ships a small toolkit, and you are asked whether to keep it.** A logger, a
+serializable `Guid` with its drawer, an IL2CPP check attribute, a debounce runner, a state machine and
+a few `*Utils`. Nothing above it references any of it, so all 3 answers - keep it, keep only the
+`Shared` root, throw it all out - leave a project that compiles. The 3 assemblies stay either way
+
+**An empty `CLAUDE.md` is normal.** 5 of them ship that way. It is a reserved slot for a folder that
 holds no knowledge beyond its own code yet, not an unfinished file and not something to fill in to make
 the repository look tidy
 

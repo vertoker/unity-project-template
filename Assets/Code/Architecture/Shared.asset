@@ -14,7 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: AssemblyBuilder::AssemblyBuilder.AssemblyBuilder
   _readonly: 0
   _inheritMode: 2
-  _publicParents: []
+  _publicParents:
+  - {fileID: 11400000, guid: d35572c6ec642a14eb9fa82e6884e79b, type: 2}
+  - {fileID: 11400000, guid: 72f99f5bc94bda847bc35b9805aa6c95, type: 2}
+  - {fileID: 11400000, guid: e69ee519d7677e14898a3c0c7f9ef696, type: 2}
   _privateParents: []
   _definitions:
   - {fileID: 5897886265953266890, guid: 2024d38f372b3da428e43d662f2fe03f, type: 3}
