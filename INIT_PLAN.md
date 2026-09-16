@@ -52,12 +52,12 @@ apply", and phase 4 drops the line rather than writing `—` into the file.
 
 ### Autonomy modes
 
-| Mode | What the session may do in the Unity Editor |
-|---|---|
-| **`Careful`** *(recommended)* | Reads and test runs are free. Small asset edits happen, and are reported every time. Play Mode, scene mutations, menu items and arbitrary code need permission. The Editor is never left locked. |
-| **`Bold`** | The whole MCP surface without asking, including Play Mode and saving scenes — but each action is announced in one line, whatever was taken is restored, and a behaviour change is not done until it has been watched happening. Deletions, bulk edits, packages, builds and new assemblies still need permission. |
-| **`Paranoid`** | Reading only. Every write — including `refresh_unity` and running tests — needs permission granted in advance for that specific action, and is reported individually afterwards. |
-| **`Automatic`** | No permission boundary at all: every tool, every action, no asking. Only large changes get a brief report; small ones are not narrated. **Offer this one with the warning attached** — see below. |
+| Mode | Fits | What the session may do in the Unity Editor |
+|---|---|---|
+| **`Careful`** *(recommended)* | multi-agent | Reads and test runs are free. Small asset edits happen, and are reported every time. Play Mode, scene mutations, menu items and arbitrary code need permission. The Editor is never left locked. |
+| **`Bold`** | one agent alone | The whole MCP surface without asking, including Play Mode and saving scenes — but each action is announced in one line, whatever was taken is restored, and a behaviour change is not done until it has been watched happening. Deletions, bulk edits, packages, builds and new assemblies still need permission. |
+| **`Paranoid`** | any | Reading only. Every write — including `refresh_unity` and running tests — needs permission granted in advance for that specific action, and is reported individually afterwards. |
+| **`Automatic`** | one agent, throwaway project | No permission boundary at all: every tool, every action, no asking. Only large changes get a brief report; small ones are not narrated. **Offer this one with the warning attached** — see below. |
 
 **If the author picks `Automatic`, say this before accepting it:** it removes the confirmation step
 from deleting assets, rewriting many files at once, changing packages and running builds. Nothing
