@@ -1,4 +1,4 @@
-# CLAUDE.md — `<project name>`
+# CLAUDE.md — <project name>
 
 > **This project is not initialized yet.** Read `INIT_PLAN.md` and run it before doing any other
 > work. Everything below still contains `<placeholders>`.
@@ -10,31 +10,31 @@ in `Docs/`, in `.claude/rules/` (which load with the files they govern) and in t
 
 ## Project overview
 
-`<project name>` — `<project description, 2-3 sentences>`
+<project name> — <project description, 2-3 sentences>
 
-- **Genre:** `<genre>`
-- **Target platforms:** `<target platforms>`
-- **Distribution channels:** `<distribution channels>`
+- **Genre:** <genre>
+- **Target platforms:** <target platforms>
+- **Distribution channels:** <distribution channels>
 - **Engine:** Unity 6000.6.0f1
 
 ## Technical overview
 
 | Area | Choice | Where the reasoning lives |
 |---|---|---|
-| Render pipeline | URP 17.6 | `Docs/dependencies.md` |
-| Data-oriented core | Entities 6.6 + Entities.Graphics, Burst, Collections, Mathematics | `Docs/dependencies.md` |
-| Content delivery | Addressables 2.11 | `Docs/dependencies.md` |
-| Localization | `com.unity.localization` 1.5, string tables under `Assets/Addressables/` | `Docs/dependencies.md` |
+| Render pipeline | URP 17.6 | `Packages/manifest.json` |
+| Data-oriented core | Entities 6.6 + Entities.Graphics, Burst, Collections, Mathematics | `Packages/manifest.json` |
+| Content delivery | Addressables 2.11 | `Packages/manifest.json` |
+| Localization | `com.unity.localization` 1.5, string tables under `Assets/Addressables/` | `Packages/manifest.json` |
 | UI | UI Toolkit — `.uxml` / `.uss` / `.tss` | `Docs/architecture.md` |
 | Input | Input System 1.20 | — |
 | Dependency injection | VContainer | `Docs/architecture.md` |
-| Async | UniTask | `Docs/dependencies.md` |
+| Async | UniTask | `Packages/manifest.json` |
 | Events | UniRx | `Docs/architecture.md` |
 | Inspector attributes | NaughtyAttributes | — |
 | Assembly graph | `com.vertoker.assemblybuilder` | `Docs/architecture.md` |
 | Tests | Unity Test Framework 1.8 (NUnit) | `Docs/testing.md` |
-| Third-party via NuGet | NuGetForUnity | `Docs/dependencies.md` |
-| Multiple editors on one clone | ParrelSync | `Docs/dependencies.md` |
+| Third-party via NuGet | NuGetForUnity | `Packages/manifest.json` |
+| Multiple editors on one clone | ParrelSync | `Packages/manifest.json` |
 | Editor automation | `com.coplaydev.unity-mcp` | `Docs/troubleshooting.md` |
 
 ### Installed but not used
@@ -43,7 +43,7 @@ The package list is not a list of decisions. This project starts with a broad ma
 `Assets/Code`, so at the outset **nothing in it is load-bearing** — a package being present is not
 permission to build a solution on it, and the absence of a row above is not a gap to fill. A package
 earns its row in the table the moment it is first used deliberately, and the row names where the
-reasoning lives. Until then, treat the manifest as inventory and `Docs/dependencies.md` as the record.
+reasoning lives. Until then, `Packages/manifest.json` is the only inventory, and there is no second list.
 
 ## Rules
 
@@ -63,10 +63,10 @@ there. Unity serialized assets are edited in small, reported increments under
 cleanly and including `INIT_PLAN.md` itself. Offer a commit and stop there; the author decides
 whether the work is worth one and what the message says.
 
-### 3. Only English in the repo, `<preferred chat language>` in conversation
+### 3. Only English in the repo, <preferred chat language> in conversation
 
 Everything written into the repository — comments, `.md`, identifiers, commit-ready text — is
-English. Everything said to the author is `<preferred chat language>`. This is mandatory, not a
+English. Everything said to the author is <preferred chat language>. This is mandatory, not a
 preference, and it does not soften when the source material is in another language.
 
 <!-- RULE_4 — INIT_PLAN phase 3 replaces this line with InitTemp/Rule4/MODE/rule_4.md -->
@@ -121,6 +121,7 @@ is an unreviewable diff.
 | `.claude/rules/tests.md` | `**/Tests/**/*.cs` | the attributes, `Metadata.cs`, the difficulty scale |
 | `.claude/rules/assemblies.md` | `.asmdef`, `Assets/Code/Architecture/**` | the generated graph and how to change it |
 | `.claude/rules/editor_assemblies.md` | `**/Editor/**/*.cs`, `*.Editor.asmdef` | placement, naming, menus, the editor-only fork |
+| `.claude/rules/dependencies.md` | `Packages/manifest.json`, `Assets/packages.config`, `Assets/NuGet.config` | the four routes in, and what each costs |
 
 ## Architecture
 
@@ -162,6 +163,20 @@ Composition starts at `Assets/Scenes/Boot.unity` and flows into the VContainer s
 - Style, naming, comments, error handling: `Docs/code_style.md`. It is the long one, and it is the
   file to read before writing the first line of a new subsystem.
 
+## How work gets done
+
+**A feature is planned by a capable model and executed by a cheaper one.** The plan lands in
+`Docs/Plans/` and is the handoff between the two — written for an executor who was not present when
+it was decided. This is the default route for anything spanning several files, changing an interface,
+or adding a system.
+
+**An ordinary bug does not need a plan.** A mid-tier model reads the code, finds the cause, fixes it.
+Writing a plan for a one-file fix costs more than the fix.
+
+If you are executing a plan and it turns out to be wrong, stop and say so — do not improvise around
+it. Guessing at intent is the failure the split exists to prevent. Full conventions, including how a
+plan's status is recorded in its filename: `Docs/Plans/README.md`.
+
 ## The map
 
 Read the row that matches the question you arrived with.
@@ -173,7 +188,8 @@ Read the row that matches the question you arrived with.
 | How do the layers fit together, and where does new code go? | `Docs/architecture.md` |
 | How do I write, place, categorise and run a test? | `Docs/testing.md` |
 | How should this code look — naming, abstractions, comments, errors? | `Docs/code_style.md` |
-| How do I add a third-party library, and which mechanism? | `Docs/dependencies.md` |
+| How do I add a third-party library, and which mechanism? | `.claude/rules/dependencies.md` — loads with the manifest |
+| How does a feature get built here? | `Docs/Plans/README.md` |
 | Something in Unity or MCP is behaving strangely | `Docs/troubleshooting.md` |
 | Why was it built this way, and what was rejected? | `Docs/adr.md` |
 | Was this already tried and measured? | `Docs/Issues/README.md` |

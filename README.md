@@ -16,7 +16,9 @@ the game.
 
 **It asks which language you want to talk in first, on its own, and switches to it before anything
 else** — then interviews you once: name, pitch, genre, platforms, stores, company, author details,
-locales, and **how much autonomy the agent gets in the Unity Editor**. After that it fills in every
+locales, and **how much autonomy the agent gets in the Unity Editor**. Only the name, the pitch, the
+author and the autonomy mode are required; anything else can be answered with a dash. After that it
+fills in every
 placeholder, creates the three starter `.cs` files, renames the product, verifies the project
 compiles, and deletes itself. It does not commit; that stays yours.
 
@@ -28,10 +30,10 @@ is removed from the manifest.
 | | |
 |---|---|
 | `CLAUDE.md` | The navigator — eleven numbered rules, the stack, the architecture, and a map to everything else. Kept under 300 lines because it loads into every session. |
-| `.claude/rules/` | Six rules that load **only** with the files they govern — assets, UI Toolkit, tests, assemblies, editor code — plus one always-on rule for the Unity Editor. |
+| `.claude/rules/` | Seven rules that load **only** with the files they govern — assets, UI Toolkit, tests, assemblies, editor code, dependencies — plus one always-on rule for the Unity Editor. |
 | `.claude/skills/` | `add-assembly`, `unity-verify`, `unity-md-improver`, `new-claude-md`. |
 | `.claude/hooks/` | Auto-approves tool calls in plan mode, where nothing can be written anyway. |
-| `Docs/` | Architecture, code style, testing, dependencies, troubleshooting, decision records, authors, and `Issues/` for things that were tried and measured. |
+| `Docs/` | Architecture, code style, testing, troubleshooting, decision records, authors, `Plans/` for feature work and `Issues/` for things that were tried and measured. |
 | `Assets/Code/` | Three layers — `Shared`, `Systems`, `Runtime` — with six assemblies wired through AssemblyBuilder assets rather than hand-edited `.asmdef` references. |
 | `.mcp.json` | Points Claude Code at the Unity MCP server, so a fresh clone needs no per-machine setup. |
 | `INIT_PLAN.md` | The initialisation plan. Deletes itself when done. |
@@ -45,9 +47,11 @@ start** — a package being installed is inventory, not a decision.
 - **The agent writes, the author commits.** Rule 2, and it has no exceptions.
 - **Context is loaded on demand.** The root file stays small; rules attach themselves to the file
   types they describe; long explanations live in `Docs/` and leave a one-line pointer in the code.
-- **The Unity Editor is driven over MCP**, within whichever of three autonomy modes you pick at
-  initialisation — from read-only, through the recommended middle ground, to full control of the
-  Editor with announcements and mandatory restore.
+- **Features are planned by a capable model and executed by a cheaper one**, with the plan in
+  `Docs/Plans/` as the handoff. Ordinary bugs skip the plan and go straight to the cheaper model.
+- **The Unity Editor is driven over MCP**, within whichever of four autonomy modes you pick at
+  initialisation — from read-only, through the recommended middle ground and full Editor control
+  with announcements, to no permission boundary at all.
 - **Claims are backed by tool output.** "It compiles" is not a test run, and an empty console usually
   means nothing was built.
 - **Assemblies change through the graph**, never by editing a generated `references` array.

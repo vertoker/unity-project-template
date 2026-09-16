@@ -8,7 +8,9 @@ does not own the game's composition, which is `Runtime/`.
 
 ## The systems
 
-`<systems>`
+| System | Owns | Tests | Editor |
+|---|---|---|---|
+<systems>
 
 An empty table is the expected state of a fresh project. A system that is not listed here does not
 exist as far as the graph is concerned, even if its folder does.

@@ -1,6 +1,6 @@
 # Architecture
 
-How `<project name>` is laid out, why the layers run the way they do, and what happens when you need
+How <project name> is laid out, why the layers run the way they do, and what happens when you need
 something the layout does not give you.
 
 ## Three layers
@@ -85,8 +85,10 @@ relevant scope; they do not resolve manually and they do not reach for a singlet
 
 ## Systems in this project
 
-`<systems>`
+| System | Owns | Tests | Editor |
+|---|---|---|---|
+<systems>
 
-Each row names the system, what it owns, and whether it carries `Tests` or `Editor` assemblies. A
-system that is not listed here does not exist as far as the graph is concerned — `Systems/` is empty
-in a fresh template, and that is the expected starting state.
+A system that is not listed here does not exist as far as the graph is concerned, even if its folder
+does — the table and `Assets/Code/Architecture/` have to agree. An empty table is the expected state
+of a fresh project; `Systems/` starts empty on purpose.

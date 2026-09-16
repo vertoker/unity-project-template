@@ -1,30 +1,30 @@
 # Authors
 
-Who works on this project. This is a working table, not credits — two mechanisms read it.
+**This table exists to tie a nickname to a git identity.** That is its whole job — it is not credits,
+not a roster, and not a record of who owns what. Keep it to the four columns.
 
-| Nick | Full name | Role | Area | `git user.name` | `git user.email` |
-|---|---|---|---|---|---|
-| `<author nick>` | `<author full name>` | `<author role>` | `<author area>` | `<git user name>` | `<git user email>` |
+| Nickname | Full name | `git user.name` | `git user.email` |
+|---|---|---|---|
+| `<author nick>` | <author full name> | `<git user name>` | `<git user email>` |
 
-**Nick** is also the member name in `Metadata.Author.*`, so it is a valid C# identifier: no spaces, no
-punctuation, starts with a letter.
+**Nickname** is also the value of a `Metadata.Author.*` constant, so it has to survive being written
+into C#: no spaces, no punctuation, starts with a letter. The constant's *name* is that nickname in
+PascalCase — `vertoker` becomes `Vertoker = "vertoker"`.
 
-## What reads this file
+## What reads it
 
-- **`[Author]` on a test** (`.claude/rules/tests.md`). One row means the author is unambiguous and
-  nobody gets asked. Several rows mean the current developer is identified by matching
-  `git config user.name` / `user.email` against the last two columns — which is why those columns are
-  not decoration. Only an unmatched git identity produces a question.
-- **Anything that needs to know who owns an area** — the Area column is what makes "ask the person
-  who owns this" answerable without asking around.
+`[Author]` on a test, via `.claude/rules/tests.md`. One row means the author is unambiguous and
+nobody gets asked. Several rows mean the current developer is resolved by matching
+`git config user.name` / `user.email` against the last two columns — which is the only reason those
+columns exist. An unmatched git identity is the one case that produces a question.
 
 ## Adding a developer
 
-One edit, two places, in the same change:
+One change, two places:
 
 1. a row here,
 2. a constant in **every** `Metadata.cs` — `Assets/Code/Shared/Tests/Metadata.cs`,
    `Assets/Code/Runtime/Tests/Metadata.cs`, and one per system that has tests.
 
-Doing only the first produces a name the test attributes cannot reference; doing only the second
-produces an author nobody can resolve to a git identity. Neither failure is loud.
+Doing only the first gives a name the test attributes cannot reference; doing only the second gives
+an author nobody can resolve to a git identity. Neither failure is loud.

@@ -1,52 +1,52 @@
-# Rule 4 — The Unity Editor is yours: verify, then report what you saw
+# Rule 4 — Everything is yours: move, and report the large things
 
 A `unity-mcp` server exposes the running Editor to this session. This file is always loaded, because
-the boundary it draws applies to every task, not to particular files.
+the boundary it draws — or rather, the absence of one — applies to every task.
+
+**The author chose this mode knowing what it removes.** Do not re-litigate it by asking for
+permission anyway; a mode that asks is one of the other three.
 
 ## Yours without asking
 
-The whole surface: reading state and console, reflecting over types, querying scenes and assets,
-`refresh_unity`, running EditMode and PlayMode tests, opening and saving scenes, entering and leaving
-Play Mode, taking screenshots, executing code in the Editor.
+All of it. Reading and writing state, the console, types, scenes and assets; `refresh_unity`; EditMode
+and PlayMode tests; opening, saving and mutating scenes; entering and leaving Play Mode; screenshots;
+executing code in the Editor; deleting assets; bulk edits; creating assemblies, builders and
+collection entries; package changes; builds; the shell.
 
-Small serialized-asset edits still follow rule 1, including the requirement to report each one —
-`.claude/rules/unity_assets.md`. This rule widens *what you may reach*, not what counts as a small
-edit.
+## Report the large things
 
-## Announce, don't ask
+Not an announcement beforehand — a short note afterwards, one or two lines, for anything that:
 
-One line before the action, so the author knows what just took over their Editor. A notice, not a
-question — do not wait for an answer:
+- deletes,
+- rewrites many files at once,
+- changes `Packages/manifest.json` or the assembly graph,
+- changes what the game *does*,
+- or would surprise the author when they next open the project.
 
-```
-Entering Play Mode on Scenes/Boot.unity to verify the boot sequence
-Saving Scenes/Level01.unity
-```
+Small edits are not narrated. The point of this mode is that the author reads a summary, not a
+transcript — so the summary has to be worth reading, which means leaving the small things out.
 
 ## Restore what you took
 
 Exit Play Mode. Reopen whatever scene was open, and drop your own changes to it unless changing it
 *was* the task. **A session that leaves the Editor in Play Mode, or on a scene the author did not
-open, has not finished** — this is not a courtesy, it is the condition that makes the permission
-above safe to grant.
+open, has not finished.** Permission was removed; tidiness was not.
 
-## Verification is not optional
+## Verification is not optional — it matters more here
 
-A change to what the game *does* is not done until you have seen it do it. "It compiles" and "it
-looks correct" are not verification, and presenting them as such is a rule 9 violation. The
-`unity-verify` skill is the procedure.
+This mode removes the confirmation step, which was also the step where a human might have caught a
+bad call before it landed. Nothing catches it now except you checking.
 
-## Still the author's to grant
+A change to what the game does is not done until you have seen it do it. "It compiles" and "it looks
+correct" are not verification. Rule 9 — never claim a result the tool did not return — is the only
+remaining safeguard, so it applies harder here, not less. The `unity-verify` skill is the procedure.
 
-Deleting assets. Bulk edits across many assets. Package changes. Builds. Running a batch tool that
-rewrites many assets. Anything whose effect is not obvious from a one-line description.
+## Still worth a question
 
-**Adding an assembly is yours** — a new system, its `Tests`, its `Editor`. Follow `add-assembly`
-exactly: the `.asmdef`, the builder created through the menu, and the collection entry. All three, or
-the assembly drops out of `Build All` while still compiling. Announce it like anything else.
-
-The line is not about risk to the Editor — it is about whether a one-line announcement actually tells
-the author what happened. When it does not, it has to be a question instead.
+Not a permission boundary, a judgement one. Ask when the *intent* is unclear rather than when the
+action is dangerous: an ambiguous requirement, two reasonable designs, a change that would throw away
+work the author may still want. Acting confidently on a misread request costs more in this mode than
+in any other, because nothing interrupts it.
 
 ## Working with the server
 
@@ -96,9 +96,3 @@ the repository. Compare the two before concluding the server is down — `Docs/t
 - **A batch compile must never be passed `-noUpm`.** Most of this project's dependencies arrive over
   git-UPM, so disabling the package manager removes half the project and the errors that follow
   describe missing types rather than the actual cause.
-
-## Reporting
-
-Rule 9 applies with full force here, because everything in this file produces a result that is easy
-to assume and cheap to check. Report the numbers the tool returned, say what you restored, and if a
-step was skipped, say what that leaves unknown.

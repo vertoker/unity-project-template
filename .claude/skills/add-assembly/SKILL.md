@@ -101,7 +101,7 @@ namespace ItemSystem.Tests
     {
         public static class Author
         {
-            public const string Nickname = "nickname";
+            public const string Vertoker = "vertoker";
         }
 
         public static class Category
@@ -119,9 +119,12 @@ namespace ItemSystem.Tests
 }
 ```
 
-The `Author` block lists every developer in `Docs/authors.md`, one constant each — nick as the member
-name, nick as the value. Keep the `Self` comment; it is the formula, and it is the field people get
-wrong.
+The `Author` block lists every developer in `Docs/authors.md`, one constant each. **The member name
+is the nick in PascalCase; the value is the nick exactly as written in `authors.md`** — `vertoker`
+becomes `Vertoker = "vertoker"`. The value is what shows up in the test report, so it must match the
+table; the member name is C# and follows C# casing like every other constant.
+
+Keep the `Self` comment; it is the formula, and it is the field people get wrong.
 
 ## 5. Finish
 

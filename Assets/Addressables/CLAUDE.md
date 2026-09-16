@@ -14,7 +14,7 @@ rendered on screen.
 | `Strings/Strings.asset` | the table collection |
 | `Strings/Strings_en.asset` | the **values** for `en` |
 
-Target locales: `<target locales>`.
+Target locales: <target locales>.
 
 ## A string lives in three places at once
 

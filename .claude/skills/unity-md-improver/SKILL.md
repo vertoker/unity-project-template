@@ -81,7 +81,8 @@ These are what make this an audit of *this* project rather than a generic one.
    of unused packages — that would be a copy of `Packages/manifest.json`, i.e. machine-derivable. It
    must carry the invariant. Check that every package named in the Technical overview table is
    actually used by something, and that the table's "Where the reasoning lives" column holds only
-   `Docs/dependencies.md`, `Docs/architecture.md` or `—`.
+   `Packages/manifest.json`, `Docs/architecture.md`, `Docs/testing.md`,
+   `Docs/troubleshooting.md` or `—`.
 2. **Assembly graph against the described layers.** Compare the real `.asmdef` set and the builders
    in `Assets/Code/Architecture/` against `Docs/architecture.md`. A builder with no assembly, an
    assembly with no builder, or an assembly missing from its layer collection is a finding — all

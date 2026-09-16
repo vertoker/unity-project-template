@@ -41,7 +41,7 @@ assembly is part of `add-assembly`, and `Docs/adr.md` records why it lives there
 ## `Architecture/` is not code
 
 `Assets/Code/Architecture/` holds the AssemblyBuilder graph — it generates the `references` array of
-every `.asmdef` in `<project name>`. It is not a layer, not a namespace and not dependency injection.
+every `.asmdef` in <project name>. It is not a layer, not a namespace and not dependency injection.
 See `Assets/Code/Architecture/CLAUDE.md`.
 
 ## Tests and editor code
