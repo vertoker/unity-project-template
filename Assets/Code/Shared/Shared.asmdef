@@ -1,6 +1,6 @@
 {
     "name": "Shared",
-    "rootNamespace": "",
+    "rootNamespace": "Shared",
     "references": [],
     "includePlatforms": [],
     "excludePlatforms": [],

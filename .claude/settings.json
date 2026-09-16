@@ -1,0 +1,18 @@
+{
+  "modelSettings": {
+    "claude-opus-5": { "effortLevel": "high" }
+  },
+  "hooks": {
+    "PreToolUse": [
+      {
+        "matcher": "*",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node \"$CLAUDE_PROJECT_DIR/.claude/hooks/plan_mode_autoapprove.mjs\""
+          }
+        ]
+      }
+    ]
+  }
+}

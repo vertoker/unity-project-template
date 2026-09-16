@@ -149,6 +149,9 @@ riderModule.iml
 # Personal overrides of agent instructions - the shared CLAUDE.md is committed, this one is not
 CLAUDE.local.md
 
+# Per-machine permission grants Claude Code writes by itself - settings.json is committed, this is not
+.claude/settings.local.json
+
 # --------------------------------------------------------------------------------------------
 # Build output
 # --------------------------------------------------------------------------------------------

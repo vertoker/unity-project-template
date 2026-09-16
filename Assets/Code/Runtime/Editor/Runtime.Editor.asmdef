@@ -1,6 +1,6 @@
 {
     "name": "Runtime.Editor",
-    "rootNamespace": "",
+    "rootNamespace": "Runtime.Editor",
     "references": [
         "GUID:2024d38f372b3da428e43d662f2fe03f",
         "GUID:f1e66d052e3f17840a04492c91c75f37",
