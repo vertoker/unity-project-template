@@ -10,11 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 91a1fcd7b19e48f0a7c23ca983ddeff0, type: 3}
-  m_Name: Core
+  m_Name: Shared
   m_EditorClassIdentifier: AssemblyBuilder::AssemblyBuilder.AssemblyBuilder
   _readonly: 0
   _inheritMode: 2
   _publicParents: []
   _privateParents: []
   _definitions:
-  - {fileID: 5897886265953266890, guid: 7936944eaeb12094ca19e2265709233e, type: 3}
+  - {fileID: 5897886265953266890, guid: 2024d38f372b3da428e43d662f2fe03f, type: 3}

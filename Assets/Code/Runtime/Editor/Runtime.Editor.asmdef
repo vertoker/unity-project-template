@@ -1,8 +1,10 @@
 {
-    "name": "Tests",
+    "name": "Runtime.Editor",
     "rootNamespace": "",
     "references": [
-        "GUID:7936944eaeb12094ca19e2265709233e"
+        "GUID:2024d38f372b3da428e43d662f2fe03f",
+        "GUID:f1e66d052e3f17840a04492c91c75f37",
+        "GUID:8815664982bfe6a4ea1d4dc4e5c1226b"
     ],
     "includePlatforms": [
         "Editor"
@@ -11,7 +13,7 @@
     "allowUnsafeCode": false,
     "overrideReferences": false,
     "precompiledReferences": [],
-    "autoReferenced": false,
+    "autoReferenced": true,
     "defineConstraints": [],
     "versionDefines": [],
     "noEngineReferences": false

@@ -10,10 +10,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d3da380ca85b4d3aaf70d3bf059a7421, type: 3}
-  m_Name: _AllAssemblies
+  m_Name: _AllEditor
   m_EditorClassIdentifier: AssemblyBuilder::AssemblyBuilder.AssemblyBuilderCollection
   _builders:
-  - {fileID: 11400000, guid: 4ea1fc402b3f3db489e32b714d440ed5, type: 2}
-  - {fileID: 11400000, guid: 41b35e3ea6e6f344e9c69e860c2092a8, type: 2}
-  - {fileID: 11400000, guid: 6c1a5b565d9acbd44abca786c7d85840, type: 2}
-  - {fileID: 11400000, guid: ff11a63feb1ccf34ab7de511c766448d, type: 2}
+  - {fileID: 11400000, guid: 6b2d7aaa527460d4493bfd1e8d86fc51, type: 2}
+  - {fileID: 11400000, guid: b590abe3697757e498ed9596f3eb7a0f, type: 2}

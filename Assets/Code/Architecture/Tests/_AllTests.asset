@@ -13,4 +13,5 @@ MonoBehaviour:
   m_Name: _AllTests
   m_EditorClassIdentifier: AssemblyBuilder::AssemblyBuilder.AssemblyBuilderCollection
   _builders:
-  - {fileID: 11400000, guid: 1d11541e58ff38a4bb52340dcdd4faac, type: 2}
+  - {fileID: 11400000, guid: 5017d4e2a53bfcc42a745999bd60b3f5, type: 2}
+  - {fileID: 11400000, guid: b6d822cf5dca7074fae1e0e991d9ab88, type: 2}

@@ -10,12 +10,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 91a1fcd7b19e48f0a7c23ca983ddeff0, type: 3}
-  m_Name: Core.Tests
+  m_Name: Runtime.Tests
   m_EditorClassIdentifier: AssemblyBuilder::AssemblyBuilder.AssemblyBuilder
   _readonly: 0
   _inheritMode: 2
   _publicParents:
-  - {fileID: 11400000, guid: 29e0b21f150193d49a0d3d49b19b3133, type: 2}
+  - {fileID: 11400000, guid: 5017d4e2a53bfcc42a745999bd60b3f5, type: 2}
+  - {fileID: 11400000, guid: ff11a63feb1ccf34ab7de511c766448d, type: 2}
   _privateParents: []
   _definitions:
-  - {fileID: 5897886265953266890, guid: da1162f5073eccf4288c15846d01c756, type: 3}
+  - {fileID: 5897886265953266890, guid: 5c29c47075faebf49a6a609e506f3af1, type: 3}
